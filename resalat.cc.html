@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kulturverein Resalat - Medienarchiv</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Basis-Stile */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --secondary: #374151;
+            --accent: #ea580c;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #ea580c;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            border-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        
+        /* Navigationsverlauf */
+        .history-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+            padding: 0 15px;
+        }
+        
+        .history-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .history-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .history-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--dark);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-top: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 30px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Hero-Bereich */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Medienbibliothek */
+        .media-library {
+            background-color: white;
+        }
+        
+        .media-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--light);
+            border-radius: 6px;
+            padding: 0 15px;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .filter-btn:hover:not(.active) {
+            background-color: #d1d5db;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .media-item {
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .media-preview {
+            height: 180px;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .media-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .media-info {
+            padding: 20px;
+        }
+        
+        .media-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .media-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .media-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Upload-Bereich */
+        .upload-section {
+            background-color: var(--light);
+        }
+        
+        .upload-area {
+            border: 3px dashed var(--light-gray);
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background-color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.02);
+        }
+        
+        .upload-area.drag-over {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .upload-area h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .upload-area p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .file-list {
+            margin-top: 30px;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+        
+        .file-details h4 {
+            margin-bottom: 5px;
+        }
+        
+        .file-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Letzte Aktivitäten */
+        .recent-activity {
+            background-color: white;
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .activity-item:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        
+        .activity-details {
+            flex-grow: 1;
+        }
+        
+        .activity-details h4 {
+            margin-bottom: 5px;
+        }
+        
+        .activity-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .activity-time {
+            color: var(--gray);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        /* Login-Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .login-modal {
+            background-color: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        
+        .modal-overlay.active .login-modal {
+            transform: translateY(0);
+        }
+        
+        .login-modal h2 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .login-modal p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Stile */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            
+            .media-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links, .nav-user, .history-controls {
+                display: none;
+            }
+            
+            .nav-links.active, .nav-user.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                gap: 0;
+            }
+            
+            .nav-links.active li {
+                margin: 10px 0;
+            }
+            
+            .nav-user.active {
+                align-items: flex-start;
+                margin-left: 0;
+                padding-top: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .media-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 140px 0 70px;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .login-modal {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">ر</div>
+                    <div>
+                        <div class="logo-text">Kulturverein Resalat</div>
+                        <div class="logo-subtext">Medienarchiv & Plattform</div>
+                    </div>
+                </a>
+                
+                <div class="history-controls">
+                    <button class="history-btn" id="backBtn" title="Zurück (Pfeil links)">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="history-btn" id="forwardBtn" title="Vorwärts (Pfeil rechts)" disabled>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#library"><i class="fas fa-photo-video"></i> Medienbibliothek</a></li>
+                    <li><a href="#upload"><i class="fas fa-cloud-upload-alt"></i> Hochladen</a></li>
+                    <li><a href="#activity"><i class="fas fa-history"></i> Letzte Aktivitäten</a></li>
+                    <li><a href="#" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Anmelden</a></li>
+                </ul>
+                
+                <div class="nav-user" id="navUser">
+                    <div class="user-avatar">MA</div>
+                    <div>
+                        <div style="font-weight: 600; color: white;">Mustafa Ahmed</div>
+                        <div style="font-size: 0.8rem; color: #cbd5e1;">Vorstandsmitglied</div>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero-Bereich -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Medienarchiv des Kulturvereins Resalat</h1>
+                <p>Zugriff auf Fotos, Videos und Dokumente unserer Vereinsaktivitäten, Veranstaltungen und kulturellen Projekte. Ein sicheres, organisiertes Archiv für Mitglieder und Mitarbeiter.</p>
+                <a href="#library" class="btn"><i class="fas fa-photo-video"></i> Medienbibliothek durchsuchen</a>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalFiles">1.842</div>
+                        <div class="stat-label">Mediendateien</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalStorage">89.5</div>
+                        <div class="stat-label">GB Speicher belegt</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="activeUsers">64</div>
+                        <div class="stat-label">Aktive Nutzer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medienbibliothek -->
+    <section class="media-library section-padding" id="library">
+        <div class="container">
+            <div class="section-title">
+                <h2>Medienbibliothek</h2>
+                <p>Durchsuchen und verwalten Sie alle Fotos, Videos und Dokumente des Kulturvereins</p>
+            </div>
+            
+            <div class="media-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="mediaSearch" placeholder="Dateien suchen...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Alle Medien</button>
+                    <button class="filter-btn" data-filter="image"><i class="fas fa-image"></i> Bilder</button>
+                    <button class="filter-btn" data-filter="video"><i class="fas fa-video"></i> Videos</button>
+                    <button class="filter-btn" data-filter="document"><i class="fas fa-file"></i> Dokumente</button>
+                </div>
+                
+                <div>
+                    <button class="btn" id="downloadSelected"><i class="fas fa-download"></i> Auswahl herunterladen</button>
+                </div>
+            </div>
+            
+            <div class="media-grid" id="mediaGrid">
+                <!-- Medien-Elemente werden hier dynamisch generiert -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload-Bereich -->
+    <section class="upload-section section-padding" id="upload">
+        <div class="container">
+            <div class="section-title">
+                <h2>Medien hochladen</h2>
+                <p>Laden Sie Fotos, Videos und Dokumente in das sichere Archiv des Vereins hoch</p>
+            </div>
+            
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Dateien hierher ziehen und ablegen</h3>
+                <p>Laden Sie Bilder (JPG, PNG, GIF), Videos (MP4, MOV) oder Dokumente (PDF, DOC, XLS) hoch. Maximale Dateigröße: 500MB</p>
+                <button class="btn" id="browseFilesBtn"><i class="fas fa-folder-open"></i> Dateien durchsuchen</button>
+                <input type="file" id="fileInput" multiple style="display: none;">
+            </div>
+            
+            <div class="file-list" id="fileList">
+                <!-- Hochgeladene Dateien erscheinen hier -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Letzte Aktivitäten -->
+    <section class="recent-activity section-padding" id="activity">
+        <div class="container">
+            <div class="section-title">
+                <h2>Letzte Aktivitäten</h2>
+                <p>Verfolgen Sie die neuesten Uploads, Downloads und Benutzeraktionen</p>
+            </div>
+            
+            <div class="activity-list" id="activityList">
+                <!-- Aktivitäts-Elemente werden hier dynamisch generiert -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Login-Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-modal">
+            <h2>Vereins-Login</h2>
+            <p>Geben Sie Ihre Zugangsdaten für die Medienplattform ein</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Benutzername oder E-Mail</label>
+                    <input type="text" id="username" placeholder="Benutzername eingeben" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" placeholder="Passwort eingeben" required>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" id="cancelLoginBtn">Abbrechen</button>
+                    <button type="submit" class="btn">Anmelden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kulturverein Resalat</h3>
+                    <p>Ein gemeinnütziger Verein zur Förderung kultureller Aktivitäten, interkulturellen Austauschs und sozialer Projekte. Gegründet 2005.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Schnellzugriff</h3>
+                    <ul class="footer-links">
+                        <li><a href="#library"><i class="fas fa-chevron-right"></i> Medienbibliothek</a></li>
+                        <li><a href="#upload"><i class="fas fa-chevron-right"></i> Dateien hochladen</a></li>
+                        <li><a href="#activity"><i class="fas fa-chevron-right"></i> Letzte Aktivitäten</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Benutzerhandbuch</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Kontakt & Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Hilfe-Center</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> IT-Support kontaktieren</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Datenschutzrichtlinie</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Nutzungsbedingungen</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Kulturverein Resalat e.V. Alle Rechte vorbehalten. | Medienzugangsplattform v2.1</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigationsverlauf Management
+        const historyStack = [];
+        let currentHistoryIndex = -1;
+        
+        function updateHistoryControls() {
+            const backBtn = document.getElementById('backBtn');
+            const forwardBtn = document.getElementById('forwardBtn');
+            
+            backBtn.disabled = currentHistoryIndex <= 0;
+            forwardBtn.disabled = currentHistoryIndex >= historyStack.length - 1;
+        }
+        
+        function navigateTo(sectionId) {
+            // Zukünftigen Verlauf entfernen, wenn wir nicht am Ende sind
+            if (currentHistoryIndex < historyStack.length - 1) {
+                historyStack.splice(currentHistoryIndex + 1);
+            }
+            
+            // Zum Verlauf hinzufügen
+            historyStack.push(sectionId);
+            currentHistoryIndex = historyStack.length - 1;
+            
+            // UI aktualisieren
+            updateHistoryControls();
+            scrollToSection(sectionId);
+        }
+        
+        function goBack() {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                const sectionId = historyStack[currentHistoryIndex];
+                updateHistoryControls();
+                scrollToSection(sectionId);
+            }
+        }
+        
+        function goForward() {
+            if (currentHistoryIndex < historyStack.length - 1) {
+                currentHistoryIndex++;
+                const sectionId = historyStack[currentHistoryIndex];
+                updateHistoryControls();
+                scrollToSection(sectionId);
+            }
+        }
+        
+        function scrollToSection(sectionId) {
+            const element = document.querySelector(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Start mit Home-Bereich
+        navigateTo('#home');
+        
+        // Tastaturnavigation
+        document.addEventListener('keydown', (e) => {
+            // Linke Pfeiltaste für Zurück-Navigation
+            if (e.key === 'ArrowLeft' && !e.target.matches('input, textarea')) {
+                e.preventDefault();
+                goBack();
+            }
+            
+            // Rechte Pfeiltaste für Vorwärts-Navigation
+            if (e.key === 'ArrowRight' && !e.target.matches('input, textarea')) {
+                e.preventDefault();
+                goForward();
+            }
+        });
+        
+        // Navigationsbuttons einrichten
+        document.getElementById('backBtn').addEventListener('click', goBack);
+        document.getElementById('forwardBtn').addEventListener('click', goForward);
+        
+        // Navigationslinks einrichten
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                navigateTo(targetId);
+                
+                // Mobile Menü schließen, falls offen
+                if (navLinks.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+        
+        // Mobile Menü Umschalten
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const navUser = document.getElementById('navUser');
+        
+        function toggleMobileMenu() {
+            navLinks.classList.toggle('active');
+            navUser.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        
+        // Login-Modal
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const cancelLoginBtn = document.getElementById('cancelLoginBtn');
+        
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.add('active');
+        });
+        
+        cancelLoginBtn.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+        
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('active');
+            }
+        });
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Die Login-Funktionalität würde mit dem Authentifizierungssystem Ihres Vereins verbunden werden.');
+            loginModal.classList.remove('active');
+        });
+        
+        // Medienbibliothek Daten (auf Deutsch)
+        const mediaData = [
+            { id: 1, title: "Kulturfest 2023 Fotos", type: "image", size: "45.2 MB", date: "2023-10-15", icon: "fa-image", color: "#3b82f6" },
+            { id: 2, title: "Interkultureller Workshop Video", type: "video", size: "320 MB", date: "2023-10-10", icon: "fa-video", color: "#ef4444" },
+            { id: 3, title: "Vereinsprotokoll Q3 2023", type: "document", size: "12.8 MB", date: "2023-10-05", icon: "fa-file-pdf", color: "#10b981" },
+            { id: 4, title: "Jugendtreffen Fotos", type: "image", size: "78.5 MB", date: "2023-09-28", icon: "fa-image", color: "#3b82f6" },
+            { id: 5, title: "Sprachkurs Aufnahmen", type: "video", size: "540 MB", date: "2023-09-20", icon: "fa-video", color: "#ef4444" },
+            { id: 6, title: "Finanzbericht 2023", type: "document", size: "23.1 MB", date: "2023-09-15", icon: "fa-file-word", color: "#10b981" },
+            { id: 7, title: "Gemeinschaftsgarten Projekt", type: "image", size: "62.3 MB", date: "2023-09-10", icon: "fa-image", color: "#3b82f6" }
+        ];
