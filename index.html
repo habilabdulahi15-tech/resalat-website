@@ -15,17 +15,18 @@
         }
         
         :root {
-            --primary: #1e40af;
-            --primary-dark: #1e3a8a;
-            --secondary: #374151;
-            --accent: #ea580c;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --gray: #64748b;
-            --light-gray: #e2e8f0;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
+            --primary: #81c784; /* Helles Grün */
+            --primary-dark: #66bb6a; /* Mittleres Grün */
+            --primary-light: #c8e6c9; /* Sehr helles Grün */
+            --secondary: #ffffff; /* Weiß */
+            --accent: #ffd54f; /* Gelb */
+            --light: #f5f5f5;
+            --dark: #2e7d32; /* Dunkelgrün */
+            --gray: #5a665a;
+            --light-gray: #e8f5e9;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
         }
         
         html {
@@ -94,7 +95,7 @@
         .btn:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 5px 15px rgba(129, 199, 132, 0.3);
         }
         
         .btn-outline {
@@ -111,19 +112,12 @@
         .btn-accent {
             background-color: var(--accent);
             border-color: var(--accent);
+            color: var(--dark);
         }
         
         .btn-accent:hover {
-            background-color: #ea580c;
-        }
-        
-        .btn-danger {
-            background-color: var(--danger);
-            border-color: var(--danger);
-        }
-        
-        .btn-danger:hover {
-            background-color: #dc2626;
+            background-color: #ffca28;
+            color: var(--dark);
         }
         
         /* Navigationsverlauf */
@@ -167,7 +161,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
         
         nav {
@@ -192,7 +186,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--dark);
             font-size: 1.5rem;
             font-weight: bold;
         }
@@ -205,7 +199,7 @@
         
         .logo-subtext {
             font-size: 0.9rem;
-            color: #cbd5e1;
+            color: #e8f5e9;
             margin-top: 2px;
         }
         
@@ -229,26 +223,6 @@
             color: var(--accent);
         }
         
-        .nav-user {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-left: 30px;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -261,7 +235,7 @@
         /* Hero-Bereich */
         .hero {
             padding: 160px 0 100px;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 100%);
             color: white;
         }
         
@@ -306,7 +280,7 @@
         
         /* Medienbibliothek */
         .media-library {
-            background-color: white;
+            background-color: var(--light-gray);
         }
         
         .media-controls {
@@ -321,11 +295,12 @@
         .search-box {
             display: flex;
             align-items: center;
-            background-color: var(--light);
+            background-color: white;
             border-radius: 6px;
             padding: 0 15px;
             flex-grow: 1;
             max-width: 400px;
+            border: 1px solid var(--primary-light);
         }
         
         .search-box input {
@@ -345,8 +320,8 @@
         
         .filter-btn {
             padding: 10px 20px;
-            background-color: var(--light-gray);
-            border: none;
+            background-color: white;
+            border: 1px solid var(--primary-light);
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
@@ -356,20 +331,21 @@
         .filter-btn.active {
             background-color: var(--primary);
             color: white;
+            border-color: var(--primary);
         }
         
         .filter-btn:hover:not(.active) {
-            background-color: #d1d5db;
+            background-color: var(--primary-light);
         }
         
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
         
         .media-item {
-            background-color: var(--light);
+            background-color: white;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -383,25 +359,43 @@
         }
         
         .media-preview {
-            height: 180px;
-            background-color: #e5e7eb;
+            height: 200px;
+            background-color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gray);
-            font-size: 3rem;
             position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .media-preview img, .media-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .media-preview:hover img {
+            transform: scale(1.05);
+        }
+        
+        .media-preview .fallback-icon {
+            color: var(--dark);
+            font-size: 3rem;
+            position: absolute;
         }
         
         .media-type {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(46, 125, 50, 0.8);
             color: white;
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.8rem;
+            z-index: 2;
         }
         
         .media-info {
@@ -427,90 +421,172 @@
             gap: 10px;
         }
         
-        /* Upload-Bereich */
-        .upload-section {
-            background-color: var(--light);
-        }
-        
-        .upload-area {
-            border: 3px dashed var(--light-gray);
-            border-radius: 12px;
-            padding: 60px 20px;
-            text-align: center;
-            background-color: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .upload-area:hover {
-            border-color: var(--primary);
-            background-color: rgba(37, 99, 235, 0.02);
-        }
-        
-        .upload-area.drag-over {
-            border-color: var(--primary);
-            background-color: rgba(37, 99, 235, 0.05);
-        }
-        
-        .upload-icon {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .upload-area h3 {
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .upload-area p {
-            color: var(--gray);
-            margin-bottom: 20px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .file-list {
-            margin-top: 30px;
-        }
-        
-        .file-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .file-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--light-gray);
-            border-radius: 6px;
+        /* Fullscreen Image Viewer */
+        .image-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gray);
-            font-size: 1.2rem;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
         
-        .file-details h4 {
-            margin-bottom: 5px;
+        .image-viewer-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
-        .file-details p {
-            color: var(--gray);
-            font-size: 0.9rem;
+        .image-viewer-container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 0.3s ease;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .image-details {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+        
+        .image-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .image-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .image-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #eee;
+        }
+        
+        .close-viewer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 3001;
+        }
+        
+        .close-viewer:hover {
+            color: var(--accent);
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 3001;
+        }
+        
+        .nav-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+        }
+        
+        /* Video Viewer */
+        .video-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .video-viewer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-viewer-container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fullscreen-video {
+            width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         
         /* Letzte Aktivitäten */
@@ -529,13 +605,14 @@
             align-items: center;
             gap: 15px;
             padding: 20px;
-            background-color: var(--light);
+            background-color: var(--light-gray);
             border-radius: 8px;
             transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
         }
         
         .activity-item:hover {
-            background-color: #f1f5f9;
+            background-color: var(--primary-light);
         }
         
         .activity-icon {
@@ -568,84 +645,6 @@
             color: var(--gray);
             font-size: 0.85rem;
             white-space: nowrap;
-        }
-        
-        /* Login-Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .login-modal {
-            background-color: white;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            transform: translateY(30px);
-            transition: transform 0.4s ease;
-        }
-        
-        .modal-overlay.active .login-modal {
-            transform: translateY(0);
-        }
-        
-        .login-modal h2 {
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .login-modal p {
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--light-gray);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .modal-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 25px;
         }
         
         /* Footer */
@@ -688,7 +687,7 @@
         }
         
         .footer-links a {
-            color: #cbd5e1;
+            color: #e8f5e9;
             text-decoration: none;
             transition: color 0.3s;
             display: flex;
@@ -704,8 +703,94 @@
             text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8;
+            color: #c8e6c9;
             font-size: 0.9rem;
+        }
+        
+        /* Modal für Datenschutz und Nutzungsbedingungen */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .policy-modal {
+            background-color: white;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 80vh;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-overlay.active .policy-modal {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: var(--dark);
+        }
+        
+        .policy-modal h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            padding-right: 30px;
+        }
+        
+        .policy-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .policy-content h3 {
+            color: var(--dark);
+            margin: 25px 0 10px 0;
+            font-size: 1.2rem;
+        }
+        
+        .policy-content p {
+            margin-bottom: 15px;
+        }
+        
+        .policy-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-content li {
+            margin-bottom: 8px;
         }
         
         /* Responsive Stile */
@@ -715,7 +800,26 @@
             }
             
             .media-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .policy-modal {
+                max-width: 90%;
+                padding: 30px;
+            }
+            
+            .fullscreen-image {
+                max-height: 75%;
+            }
+            
+            .nav-buttons {
+                padding: 0 10px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
         }
         
@@ -724,11 +828,11 @@
                 display: block;
             }
             
-            .nav-links, .nav-user, .history-controls {
+            .nav-links, .history-controls {
                 display: none;
             }
             
-            .nav-links.active, .nav-user.active {
+            .nav-links.active {
                 display: flex;
                 flex-direction: column;
                 position: absolute;
@@ -739,20 +843,11 @@
                 padding: 20px;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
                 z-index: 999;
-            }
-            
-            .nav-links.active {
                 gap: 0;
             }
             
             .nav-links.active li {
                 margin: 10px 0;
-            }
-            
-            .nav-user.active {
-                align-items: flex-start;
-                margin-left: 0;
-                padding-top: 0;
             }
             
             .hero h1 {
@@ -772,6 +867,27 @@
             .search-box {
                 max-width: 100%;
             }
+            
+            .policy-modal {
+                max-width: 95%;
+                padding: 25px 20px;
+                max-height: 85vh;
+            }
+            
+            .image-details h3 {
+                font-size: 1.4rem;
+            }
+            
+            .image-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .close-viewer {
+                top: 10px;
+                right: 10px;
+                font-size: 1.8rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -787,9 +903,13 @@
                 font-size: 1.8rem;
             }
             
-            .login-modal {
-                padding: 30px 20px;
-                margin: 0 15px;
+            .hero-stats {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .fullscreen-image {
+                max-height: 65%;
             }
         }
     </style>
@@ -803,7 +923,7 @@
                     <div class="logo-icon">ر</div>
                     <div>
                         <div class="logo-text">Kulturverein Resalat</div>
-                        <div class="logo-subtext">Medienarchiv & Plattform</div>
+                        <div class="logo-subtext">Gegründet 2010</div>
                     </div>
                 </a>
                 
@@ -818,18 +938,8 @@
                 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#library"><i class="fas fa-photo-video"></i> Medienbibliothek</a></li>
-                    <li><a href="#upload"><i class="fas fa-cloud-upload-alt"></i> Hochladen</a></li>
                     <li><a href="#activity"><i class="fas fa-history"></i> Letzte Aktivitäten</a></li>
-                    <li><a href="#" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Anmelden</a></li>
                 </ul>
-                
-                <div class="nav-user" id="navUser">
-                    <div class="user-avatar">MA</div>
-                    <div>
-                        <div style="font-weight: 600; color: white;">Mustafa Ahmed</div>
-                        <div style="font-size: 0.8rem; color: #cbd5e1;">Vorstandsmitglied</div>
-                    </div>
-                </div>
                 
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
@@ -843,21 +953,17 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Medienarchiv des Kulturvereins Resalat</h1>
-                <p>Zugriff auf Fotos, Videos und Dokumente unserer Vereinsaktivitäten, Veranstaltungen und kulturellen Projekte. Ein sicheres, organisiertes Archiv für Mitglieder und Mitarbeiter.</p>
+                <p>Seit 2010 fördern wir kulturellen Austausch und Gemeinschaft. Hier finden Sie unser gesamtes Medienarchiv mit Fotos und Videos unserer Aktivitäten.</p>
                 <a href="#library" class="btn"><i class="fas fa-photo-video"></i> Medienbibliothek durchsuchen</a>
                 
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number" id="totalFiles">1.842</div>
+                        <div class="stat-number" id="totalFiles">8</div>
                         <div class="stat-label">Mediendateien</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" id="totalStorage">89.5</div>
+                        <div class="stat-number" id="totalStorage">2.1</div>
                         <div class="stat-label">GB Speicher belegt</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" id="activeUsers">64</div>
-                        <div class="stat-label">Aktive Nutzer</div>
                     </div>
                 </div>
             </div>
@@ -869,7 +975,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Medienbibliothek</h2>
-                <p>Durchsuchen und verwalten Sie alle Fotos, Videos und Dokumente des Kulturvereins</p>
+                <p>Durchsuchen Sie alle Fotos und Videos des Kulturvereins Resalat seit 2010</p>
             </div>
             
             <div class="media-controls">
@@ -882,40 +988,11 @@
                     <button class="filter-btn active" data-filter="all">Alle Medien</button>
                     <button class="filter-btn" data-filter="image"><i class="fas fa-image"></i> Bilder</button>
                     <button class="filter-btn" data-filter="video"><i class="fas fa-video"></i> Videos</button>
-                    <button class="filter-btn" data-filter="document"><i class="fas fa-file"></i> Dokumente</button>
-                </div>
-                
-                <div>
-                    <button class="btn" id="downloadSelected"><i class="fas fa-download"></i> Auswahl herunterladen</button>
                 </div>
             </div>
             
             <div class="media-grid" id="mediaGrid">
-                <!-- Medien-Elemente werden hier dynamisch generiert -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Upload-Bereich -->
-    <section class="upload-section section-padding" id="upload">
-        <div class="container">
-            <div class="section-title">
-                <h2>Medien hochladen</h2>
-                <p>Laden Sie Fotos, Videos und Dokumente in das sichere Archiv des Vereins hoch</p>
-            </div>
-            
-            <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                </div>
-                <h3>Dateien hierher ziehen und ablegen</h3>
-                <p>Laden Sie Bilder (JPG, PNG, GIF), Videos (MP4, MOV) oder Dokumente (PDF, DOC, XLS) hoch. Maximale Dateigröße: 500MB</p>
-                <button class="btn" id="browseFilesBtn"><i class="fas fa-folder-open"></i> Dateien durchsuchen</button>
-                <input type="file" id="fileInput" multiple style="display: none;">
-            </div>
-            
-            <div class="file-list" id="fileList">
-                <!-- Hochgeladene Dateien erscheinen hier -->
+                <!-- Medien-Elemente werden dynamisch generiert -->
             </div>
         </div>
     </section>
@@ -925,39 +1002,14 @@
         <div class="container">
             <div class="section-title">
                 <h2>Letzte Aktivitäten</h2>
-                <p>Verfolgen Sie die neuesten Uploads, Downloads und Benutzeraktionen</p>
+                <p>Aktivitäten im Medienarchiv des Vereins</p>
             </div>
             
             <div class="activity-list" id="activityList">
-                <!-- Aktivitäts-Elemente werden hier dynamisch generiert -->
+                <!-- Aktivitäts-Elemente werden dynamisch generiert -->
             </div>
         </div>
     </section>
-
-    <!-- Login-Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="login-modal">
-            <h2>Vereins-Login</h2>
-            <p>Geben Sie Ihre Zugangsdaten für die Medienplattform ein</p>
-            
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Benutzername oder E-Mail</label>
-                    <input type="text" id="username" placeholder="Benutzername eingeben" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Passwort</label>
-                    <input type="password" id="password" placeholder="Passwort eingeben" required>
-                </div>
-                
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-outline" id="cancelLoginBtn">Abbrechen</button>
-                    <button type="submit" class="btn">Anmelden</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
@@ -965,35 +1017,171 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Kulturverein Resalat</h3>
-                    <p>Ein gemeinnütziger Verein zur Förderung kultureller Aktivitäten, interkulturellen Austauschs und sozialer Projekte. Gegründet 2005.</p>
+                    <p>Ein gemeinnütziger Verein zur Förderung kultureller Aktivitäten und interkulturellen Austauschs. Gegründet 2010.</p>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Schnellzugriff</h3>
                     <ul class="footer-links">
                         <li><a href="#library"><i class="fas fa-chevron-right"></i> Medienbibliothek</a></li>
-                        <li><a href="#upload"><i class="fas fa-chevron-right"></i> Dateien hochladen</a></li>
                         <li><a href="#activity"><i class="fas fa-chevron-right"></i> Letzte Aktivitäten</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Benutzerhandbuch</a></li>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Startseite</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Kontakt & Support</h3>
+                    <h3>Informationen</h3>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Hilfe-Center</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> IT-Support kontaktieren</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Datenschutzrichtlinie</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Nutzungsbedingungen</a></li>
+                        <li><a href="#" id="privacyBtn"><i class="fas fa-chevron-right"></i> Datenschutzrichtlinie</a></li>
+                        <li><a href="#" id="termsBtn"><i class="fas fa-chevron-right"></i> Nutzungsbedingungen</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Kulturverein Resalat e.V. Alle Rechte vorbehalten. | Medienzugangsplattform v2.1</p>
+                <p>&copy; 2010-2026 Kulturverein Resalat e.V. Alle Rechte vorbehalten. | Medienarchiv Version 2.1</p>
             </div>
         </div>
     </footer>
+
+    <!-- Fullscreen Image Viewer -->
+    <div class="image-viewer-overlay" id="imageViewer">
+        <button class="close-viewer" id="closeImageViewer">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevImageBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn" id="nextImageBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="image-viewer-container">
+            <img class="fullscreen-image" id="fullscreenImage" src="" alt="">
+            <div class="image-details">
+                <h3 id="imageTitle"></h3>
+                <div class="image-info">
+                    <span id="imageSize"></span>
+                    <span id="imageDate"></span>
+                    <span id="imageType"></span>
+                </div>
+                <p class="image-description" id="imageDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Video Viewer -->
+    <div class="video-viewer-overlay" id="videoViewer">
+        <button class="close-viewer" id="closeVideoViewer">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="video-viewer-container">
+            <video class="fullscreen-video" id="fullscreenVideo" controls>
+                Ihr Browser unterstützt das Video-Tag nicht.
+            </video>
+            <div class="image-details">
+                <h3 id="videoTitle"></h3>
+                <div class="image-info">
+                    <span id="videoSize"></span>
+                    <span id="videoDate"></span>
+                    <span>Video</span>
+                </div>
+                <p class="image-description" id="videoDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutz Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="policy-modal">
+            <button class="modal-close" id="closePrivacyBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Datenschutzrichtlinie</h2>
+            <div class="policy-content">
+                <h3>1. Datenerhebung und -verwendung</h3>
+                <p>Der Kulturverein Resalat erhebt und speichert personenbezogene Daten ausschließlich für Vereinszwecke gemäß der Datenschutz-Grundverordnung (DSGVO).</p>
+                
+                <h3>2. Arten der erhobenen Daten</h3>
+                <ul>
+                    <li>Name und Kontaktdaten (bei Mitgliedschaft)</li>
+                    <li>E-Mail-Adresse für Newsletter</li>
+                    <li>Beiträge zu Veranstaltungen (freiwillig)</li>
+                </ul>
+                
+                <h3>3. Zweck der Datenverarbeitung</h3>
+                <p>Die Daten werden verwendet für:</p>
+                <ul>
+                    <li>Organisation von Vereinsaktivitäten</li>
+                    <li>Kommunikation mit Mitgliedern</li>
+                    <li>Versand von Informationen zu Veranstaltungen</li>
+                </ul>
+                
+                <h3>4. Datenweitergabe</h3>
+                <p>Personenbezogene Daten werden nicht an Dritte weitergegeben, außer bei gesetzlichen Verpflichtungen oder mit ausdrücklicher Einwilligung der betroffenen Person.</p>
+                
+                <h3>5. Datensicherheit</h3>
+                <p>Wir treffen angemessene technische und organisatorische Maßnahmen zum Schutz der personenbezogenen Daten vor unbefugtem Zugriff oder Verlust.</p>
+                
+                <h3>6. Ihre Rechte</h3>
+                <p>Sie haben das Recht auf:</p>
+                <ul>
+                    <li>Auskunft über Ihre gespeicherten Daten</li>
+                    <li>Berichtigung unrichtiger Daten</li>
+                    <li>Löschung Ihrer Daten</li>
+                    <li>Einschränkung der Verarbeitung</li>
+                    <li>Datenübertragbarkeit</li>
+                    <li>Widerspruch gegen die Verarbeitung</li>
+                </ul>
+                
+                <h3>7. Kontakt</h3>
+                <p>Für Fragen zum Datenschutz kontaktieren Sie uns bitte über die Vereinsadresse.</p>
+                
+                <p><strong>Stand: 06-02-2026</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nutzungsbedingungen Modal -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="policy-modal">
+            <button class="modal-close" id="closeTermsBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Nutzungsbedingungen</h2>
+            <div class="policy-content">
+                <h3>1. Geltungsbereich</h3>
+                <p>Diese Nutzungsbedingungen gelten für alle Besucher der Website des Kulturvereins Resalat und die Nutzung des Medienarchivs.</p>
+                
+                <h3>2. Zugang zum Medienarchiv</h3>
+                <p>Das Medienarchiv steht allen Besuchern der Website zur Verfügung. Ein Download der Medien ist nicht möglich, sie dienen ausschließlich der Ansicht.</p>
+                
+                <h3>3. Urheberrecht</h3>
+                <p>Alle auf dieser Website veröffentlichten Bilder und Videos sind urheberrechtlich geschützt und Eigentum des Kulturvereins Resalat oder wurden mit Genehmigung der Rechteinhaber veröffentlicht.</p>
+                
+                <h3>4. Nutzungsbeschränkungen</h3>
+                <p>Es ist untersagt:</p>
+                <ul>
+                    <li>Die Medien zu kopieren, herunterzuladen oder anderweitig zu vervielfältigen</li>
+                    <li>Die Medien kommerziell zu nutzen</li>
+                    <li>Die Medien ohne Genehmigung zu verändern</li>
+                    <li>Die Medien an Dritte weiterzugeben</li>
+                </ul>
+                
+                <h3>5. Haftungsausschluss</h3>
+                <p>Der Kulturverein Resalat übernimmt keine Haftung für die Richtigkeit, Vollständigkeit oder Aktualität der bereitgestellten Informationen. Der Zugang zur Website kann vorübergehend eingeschränkt oder unterbrochen werden.</p>
+                
+                <h3>6. Änderungen der Bedingungen</h3>
+                <p>Der Verein behält sich das Recht vor, diese Nutzungsbedingungen jederzeit zu ändern. Die aktuellen Bedingungen sind auf dieser Website einsehbar.</p>
+                
+                <h3>7. Schlussbestimmungen</h3>
+                <p>Sollten einzelne Bestimmungen dieser Nutzungsbedingungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</p>
+                
+                <p><strong>Stand: 06-02-2026</strong></p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Navigationsverlauf Management
@@ -1009,16 +1197,13 @@
         }
         
         function navigateTo(sectionId) {
-            // Zukünftigen Verlauf entfernen, wenn wir nicht am Ende sind
             if (currentHistoryIndex < historyStack.length - 1) {
                 historyStack.splice(currentHistoryIndex + 1);
             }
             
-            // Zum Verlauf hinzufügen
             historyStack.push(sectionId);
             currentHistoryIndex = historyStack.length - 1;
             
-            // UI aktualisieren
             updateHistoryControls();
             scrollToSection(sectionId);
         }
@@ -1053,13 +1238,11 @@
         
         // Tastaturnavigation
         document.addEventListener('keydown', (e) => {
-            // Linke Pfeiltaste für Zurück-Navigation
             if (e.key === 'ArrowLeft' && !e.target.matches('input, textarea')) {
                 e.preventDefault();
                 goBack();
             }
             
-            // Rechte Pfeiltaste für Vorwärts-Navigation
             if (e.key === 'ArrowRight' && !e.target.matches('input, textarea')) {
                 e.preventDefault();
                 goForward();
@@ -1080,7 +1263,6 @@
                 
                 navigateTo(targetId);
                 
-                // Mobile Menü schließen, falls offen
                 if (navLinks.classList.contains('active')) {
                     toggleMobileMenu();
                 }
@@ -1090,11 +1272,9 @@
         // Mobile Menü Umschalten
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
-        const navUser = document.getElementById('navUser');
         
         function toggleMobileMenu() {
             navLinks.classList.toggle('active');
-            navUser.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
             
             if (navLinks.classList.contains('active')) {
@@ -1108,39 +1288,431 @@
         
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         
-        // Login-Modal
-        const loginBtn = document.getElementById('loginBtn');
-        const loginModal = document.getElementById('loginModal');
-        const cancelLoginBtn = document.getElementById('cancelLoginBtn');
+        // Modal Funktionen
+        const privacyModal = document.getElementById('privacyModal');
+        const termsModal = document.getElementById('termsModal');
+        const privacyBtn = document.getElementById('privacyBtn');
+        const termsBtn = document.getElementById('termsBtn');
+        const closePrivacyBtn = document.getElementById('closePrivacyBtn');
+        const closeTermsBtn = document.getElementById('closeTermsBtn');
         
-        loginBtn.addEventListener('click', (e) => {
+        privacyBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            loginModal.classList.add('active');
+            privacyModal.classList.add('active');
         });
         
-        cancelLoginBtn.addEventListener('click', () => {
-            loginModal.classList.remove('active');
+        termsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            termsModal.classList.add('active');
         });
         
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.classList.remove('active');
+        closePrivacyBtn.addEventListener('click', function() {
+            privacyModal.classList.remove('active');
+        });
+        
+        closeTermsBtn.addEventListener('click', function() {
+            termsModal.classList.remove('active');
+        });
+        
+        // Modal schließen bei Klick außerhalb
+        [privacyModal, termsModal].forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // ==============================================
+        // HIER GIBST DU DEINE EIGENEN FOTOS & VIDEOS EIN!
+        // ==============================================
+        
+        // Medienbibliothek Daten mit DATEI-LINKS
+        let mediaData = [
+            { 
+                id: 1, 
+                title: "bild", 
+                type: "image", 
+                size: "2.5 MB", 
+                date: "15-05-2010", 
+                fileUrl: "WhatsApp Image 2026-02-06 at 11.06.47.jpeg", // HIER DEIN BILD-LINK
+                description: "bild"
+            },
+            { 
+                id: 2, 
+                title: "Kulturfest 2015", 
+                type: "video", 
+                size: "45 MB", 
+                date: "10-10-2015", 
+                fileUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", // HIER DEIN VIDEO-LINK
+                description: "Das große Kulturfest im Jahr 2015 mit über 200 Teilnehmern"
+            },
+            { 
+                id: 3, 
+                title: "Interkultureller Workshop 2019", 
+                type: "image", 
+                size: "3.2 MB", 
+                date: "28-09-2019", 
+                fileUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop", // HIER DEIN BILD-LINK
+                description: "Workshop zum interkulturellen Austausch mit verschiedenen Kulturen"
+            },
+            { 
+                id: 4, 
+                title: "Vereinsjubiläum 2020", 
+                type: "video", 
+                size: "62 MB", 
+                date: "20-06-2020", 
+                fileUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4", // HIER DEIN VIDEO-LINK
+                description: "10-jähriges Vereinsjubiläum mit besonderen Gästen"
+            },
+            { 
+                id: 5, 
+                title: "Sommerfest 2022", 
+                type: "image", 
+                size: "4.1 MB", 
+                date: "10-07-2022", 
+                fileUrl: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&h=800&fit=crop", // HIER DEIN BILD-LINK
+                description: "Sommerfest im Vereinsgarten mit traditionellem Essen"
+            },
+            { 
+                id: 6, 
+                title: "Frühlingsfest 2023", 
+                type: "image", 
+                size: "3.8 MB", 
+                date: "15-04-2023", 
+                fileUrl: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1200&h=800&fit=crop", // HIER DEIN BILD-LINK
+                description: "Frühlingsfest mit Blumen und traditioneller Musik"
+            },
+            { 
+                id: 7, 
+                title: "Herbstfest 2021", 
+                type: "image", 
+                size: "3.5 MB", 
+                date: "25-09-2021", 
+                fileUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop", // HIER DEIN BILD-LINK
+                description: "Herbstfest mit Erntedank-Feier"
+            },
+            { 
+                id: 8, 
+                title: "Weihnachtsfeier 2022", 
+                type: "video", 
+                size: "75 MB", 
+                date: "18-12-2022", 
+                fileUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", // HIER DEIN VIDEO-LINK
+                description: "Weihnachtsfeier mit traditionellen Liedern und Geschenken"
+            }
+            // HIER KÖNNEN SIE WEITERE MEDIEN HINZUFÜGEN:
+            // { 
+            //     id: 9, 
+            //     title: "DEIN EIGENES FOTO", 
+            //     type: "image", 
+            //     size: "5.0 MB", 
+            //     date: "06-02-2026", 
+            //     fileUrl: "HIER_MUSST_DU_DEIN_BILD_HOCHLADEN_UND_DEN_LINK_EINFÜGEN", 
+            //     description: "Beschreibung deines Fotos"
+            // },
+            // { 
+            //     id: 10, 
+            //     title: "DEIN EIGENES VIDEO", 
+            //     type: "video", 
+            //     size: "120 MB", 
+            //     date: "06-02-2026", 
+            //     fileUrl: "HIER_MUSST_DU_DEIN_VIDEO_HOCHLADEN_UND_DEN_LINK_EINFÜGEN", 
+            //     description: "Beschreibung deines Videos"
+            // }
+        ];
+        
+        let activityData = [
+            { id: 1, action: "hochgeladen", file: "Gründungsfeier 2010", type: "image", time: "vor 2 Stunden", icon: "fa-cloud-upload-alt" },
+            { id: 2, action: "archiviert", file: "Kulturfest 2015", type: "video", time: "vor 5 Stunden", icon: "fa-archive" },
+            { id: 3, action: "hochgeladen", file: "Interkultureller Workshop 2019", type: "image", time: "vor 1 Tag", icon: "fa-cloud-upload-alt" },
+            { id: 4, action: "aktualisiert", file: "Medienarchiv", type: "system", time: "vor 2 Tagen", icon: "fa-cog" },
+            { id: 5, action: "hochgeladen", file: "Sommerfest 2022", type: "image", time: "vor 3 Tagen", icon: "fa-cloud-upload-alt" },
+        ];
+        
+        // ==============================================
+        // STATISTIKEN ANPASSEN
+        // ==============================================
+        let totalFiles = mediaData.length;
+        let totalStorageMB = 2100; // 2.1 GB in MB
+        
+        // ==============================================
+        // FULLSCREEN VIEWER LOGIC
+        // ==============================================
+        const imageViewer = document.getElementById('imageViewer');
+        const videoViewer = document.getElementById('videoViewer');
+        const closeImageViewer = document.getElementById('closeImageViewer');
+        const closeVideoViewer = document.getElementById('closeVideoViewer');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        const fullscreenVideo = document.getElementById('fullscreenVideo');
+        const prevImageBtn = document.getElementById('prevImageBtn');
+        const nextImageBtn = document.getElementById('nextImageBtn');
+        
+        let currentImageIndex = 0;
+        let currentFilter = 'all';
+        let filteredImages = [];
+        
+        // Funktion zum Öffnen des Bild-Viewers
+        function openImageViewer(index) {
+            currentImageIndex = index;
+            const media = filteredImages[index];
+            
+            if (media.type === 'image') {
+                fullscreenImage.src = media.fileUrl;
+                document.getElementById('imageTitle').textContent = media.title;
+                document.getElementById('imageSize').textContent = `Größe: ${media.size}`;
+                document.getElementById('imageDate').textContent = `Datum: ${media.date}`;
+                document.getElementById('imageType').textContent = 'Bild';
+                document.getElementById('imageDescription').textContent = media.description;
+                
+                imageViewer.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Scrollen deaktivieren
+            } else if (media.type === 'video') {
+                fullscreenVideo.src = media.fileUrl;
+                document.getElementById('videoTitle').textContent = media.title;
+                document.getElementById('videoSize').textContent = `Größe: ${media.size}`;
+                document.getElementById('videoDate').textContent = `Datum: ${media.date}`;
+                document.getElementById('videoDescription').textContent = media.description;
+                
+                videoViewer.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Scrollen deaktivieren
+                
+                // Video laden
+                fullscreenVideo.load();
+            }
+        }
+        
+        // Funktion zum Schließen des Viewers
+        function closeViewers() {
+            imageViewer.classList.remove('active');
+            videoViewer.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Scrollen aktivieren
+            
+            // Video pausieren
+            if (fullscreenVideo) {
+                fullscreenVideo.pause();
+            }
+        }
+        
+        // Funktion zum Navigieren zwischen Bildern
+        function navigateImage(direction) {
+            currentImageIndex += direction;
+            
+            // Loop durch die Bilder
+            if (currentImageIndex < 0) {
+                currentImageIndex = filteredImages.length - 1;
+            } else if (currentImageIndex >= filteredImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            const media = filteredImages[currentImageIndex];
+            
+            if (media.type === 'image') {
+                // Zum Bild-Viewer wechseln falls nötig
+                if (videoViewer.classList.contains('active')) {
+                    videoViewer.classList.remove('active');
+                    imageViewer.classList.add('active');
+                }
+                
+                fullscreenImage.src = media.fileUrl;
+                document.getElementById('imageTitle').textContent = media.title;
+                document.getElementById('imageSize').textContent = `Größe: ${media.size}`;
+                document.getElementById('imageDate').textContent = `Datum: ${media.date}`;
+                document.getElementById('imageDescription').textContent = media.description;
+            } else if (media.type === 'video') {
+                // Zum Video-Viewer wechseln falls nötig
+                if (imageViewer.classList.contains('active')) {
+                    imageViewer.classList.remove('active');
+                    videoViewer.classList.add('active');
+                }
+                
+                fullscreenVideo.src = media.fileUrl;
+                document.getElementById('videoTitle').textContent = media.title;
+                document.getElementById('videoSize').textContent = `Größe: ${media.size}`;
+                document.getElementById('videoDate').textContent = `Datum: ${media.date}`;
+                document.getElementById('videoDescription').textContent = media.description;
+                
+                // Video laden
+                fullscreenVideo.load();
+            }
+        }
+        
+        // Event Listeners für Viewer
+        closeImageViewer.addEventListener('click', closeViewers);
+        closeVideoViewer.addEventListener('click', closeViewers);
+        
+        // Viewer schließen bei Klick außerhalb des Inhalts
+        imageViewer.addEventListener('click', function(e) {
+            if (e.target === imageViewer) {
+                closeViewers();
             }
         });
         
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Die Login-Funktionalität würde mit dem Authentifizierungssystem Ihres Vereins verbunden werden.');
-            loginModal.classList.remove('active');
+        videoViewer.addEventListener('click', function(e) {
+            if (e.target === videoViewer) {
+                closeViewers();
+            }
         });
         
-        // Medienbibliothek Daten (auf Deutsch)
-        const mediaData = [
-            { id: 1, title: "Kulturfest 2023 Fotos", type: "image", size: "45.2 MB", date: "2023-10-15", icon: "fa-image", color: "#3b82f6" },
-            { id: 2, title: "Interkultureller Workshop Video", type: "video", size: "320 MB", date: "2023-10-10", icon: "fa-video", color: "#ef4444" },
-            { id: 3, title: "Vereinsprotokoll Q3 2023", type: "document", size: "12.8 MB", date: "2023-10-05", icon: "fa-file-pdf", color: "#10b981" },
-            { id: 4, title: "Jugendtreffen Fotos", type: "image", size: "78.5 MB", date: "2023-09-28", icon: "fa-image", color: "#3b82f6" },
-            { id: 5, title: "Sprachkurs Aufnahmen", type: "video", size: "540 MB", date: "2023-09-20", icon: "fa-video", color: "#ef4444" },
-            { id: 6, title: "Finanzbericht 2023", type: "document", size: "23.1 MB", date: "2023-09-15", icon: "fa-file-word", color: "#10b981" },
-            { id: 7, title: "Gemeinschaftsgarten Projekt", type: "image", size: "62.3 MB", date: "2023-09-10", icon: "fa-image", color: "#3b82f6" }
-        ];
+        // Navigation zwischen Bildern
+        prevImageBtn.addEventListener('click', () => navigateImage(-1));
+        nextImageBtn.addEventListener('click', () => navigateImage(1));
+        
+        // Tastatur-Navigation im Viewer
+        document.addEventListener('keydown', function(e) {
+            if (imageViewer.classList.contains('active') || videoViewer.classList.contains('active')) {
+                switch(e.key) {
+                    case 'Escape':
+                        closeViewers();
+                        break;
+                    case 'ArrowLeft':
+                        navigateImage(-1);
+                        e.preventDefault();
+                        break;
+                    case 'ArrowRight':
+                        navigateImage(1);
+                        e.preventDefault();
+                        break;
+                }
+            }
+        });
+        
+        // Funktion zur Aktualisierung der Statistiken
+        function updateStats() {
+            document.getElementById('totalFiles').textContent = totalFiles;
+            document.getElementById('totalStorage').textContent = (totalStorageMB / 1024).toFixed(1);
+        }
+        
+        // Render media items
+        function renderMediaItems(filter = "all") {
+            const mediaGrid = document.getElementById('mediaGrid');
+            mediaGrid.innerHTML = '';
+            
+            currentFilter = filter;
+            filteredImages = filter === "all" 
+                ? mediaData 
+                : mediaData.filter(item => item.type === filter);
+            
+            filteredImages.forEach((item, index) => {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                mediaItem.dataset.type = item.type;
+                
+                mediaItem.innerHTML = `
+                    <div class="media-preview" onclick="showPreview(${index})">
+                        ${item.type === 'image' 
+                            ? `<img src="${item.fileUrl}" alt="${item.title}" onerror="this.style.display='none'">` 
+                            : `<video><source src="${item.fileUrl}" type="video/mp4"></video>`}
+                        <i class="fas ${item.type === 'image' ? 'fa-image' : 'fa-video'} fallback-icon"></i>
+                        <div class="media-type">${item.type === 'image' ? 'Bild' : 'Video'}</div>
+                    </div>
+                    <div class="media-info">
+                        <div class="media-title">${item.title}</div>
+                        <div class="media-meta">
+                            <span>${item.size}</span>
+                            <span>${item.date}</span>
+                        </div>
+                        <div class="media-actions">
+                            <button class="btn" style="padding: 8px 15px; font-size: 0.9rem;" onclick="showPreview(${index})">
+                                <i class="fas fa-expand"></i> Vollbild ansehen
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                mediaGrid.appendChild(mediaItem);
+            });
+        }
+        
+        // Global function for preview
+        window.showPreview = function(index) {
+            openImageViewer(index);
+        };
+        
+        // Render activity items
+        function renderActivityItems() {
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = '';
+            
+            activityData.forEach(item => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                
+                activityItem.innerHTML = `
+                    <div class="activity-icon">
+                        <i class="fas ${item.icon}"></i>
+                    </div>
+                    <div class="activity-details">
+                        <h4>"${item.file}" wurde ${item.action}</h4>
+                        <p>${item.type === 'image' ? 'Bild' : item.type === 'video' ? 'Video' : 'System'}</p>
+                    </div>
+                    <div class="activity-time">${item.time}</div>
+                `;
+                
+                activityList.appendChild(activityItem);
+            });
+        }
+        
+        // Filter buttons functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.dataset.filter;
+                renderMediaItems(filter);
+            });
+        });
+        
+        // Search functionality
+        document.getElementById('mediaSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = mediaData.filter(item => 
+                item.title.toLowerCase().includes(searchTerm) || 
+                item.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const mediaGrid = document.getElementById('mediaGrid');
+            mediaGrid.innerHTML = '';
+            
+            filteredImages = filteredData.filter(item => 
+                currentFilter === 'all' || item.type === currentFilter
+            );
+            
+            filteredImages.forEach((item, index) => {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                mediaItem.dataset.type = item.type;
+                
+                mediaItem.innerHTML = `
+                    <div class="media-preview" onclick="showPreview(${mediaData.indexOf(item)})">
+                        ${item.type === 'image' 
+                            ? `<img src="${item.fileUrl}" alt="${item.title}" onerror="this.style.display='none'">` 
+                            : `<video><source src="${item.fileUrl}" type="video/mp4"></video>`}
+                        <i class="fas ${item.type === 'image' ? 'fa-image' : 'fa-video'} fallback-icon"></i>
+                        <div class="media-type">${item.type === 'image' ? 'Bild' : 'Video'}</div>
+                    </div>
+                    <div class="media-info">
+                        <div class="media-title">${item.title}</div>
+                        <div class="media-meta">
+                            <span>${item.size}</span>
+                            <span>${item.date}</span>
+                        </div>
+                        <div class="media-actions">
+                            <button class="btn" style="padding: 8px 15px; font-size: 0.9rem;" onclick="showPreview(${mediaData.indexOf(item)})">
+                                <i class="fas fa-expand"></i> Vollbild ansehen
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                mediaGrid.appendChild(mediaItem);
+            });
+        });
+        
+        // Initial render
+        updateStats();
+        renderMediaItems('all');
+        renderActivityItems();
+    </script>
+</body>
+</html>
